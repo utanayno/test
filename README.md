@@ -2,10 +2,10 @@
 ## Документация коллекции SkyPro_test
 
  
-Ссылка на репозиторий: [https://github.com/utanayno/test.git]
+Ссылка на репозиторий: [https://github.com/utanayno/test.git] <br>
 Документация по API GitHub issues: [https://docs.github.com/en/rest/issues/issues?apiVersion=2022-11-28#about-issues]
 
-Для работы с коллекцией должен быть создан репозиторий в github (test).
+Для работы с коллекцией должен быть создан репозиторий в github (test). <br>
 Коллекция SkyPro_test в Postman содержит 7 запросов, которая выполняет создание Issue в репозитории test, получение списка Issues, изменение и удаление Issue.
 Коллекция должна быть запущена и выполнена строго последовательно.
 
