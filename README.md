@@ -27,65 +27,66 @@
     `pm.test("Status code is 200", function () { 
     pm.response.to.have.status(201); 
 });` <br>
-2. **POST** - создание Issue в репозитории test. 
+2. **POST** - создание Issue в репозитории test. <br>
     URL: {{github_url}}/repos/utanayno/test/issues 
-    Body: {
+    Body: `{
     "title": "Issue 1", 
     "body": "Something went wrong", 
     "labels":["bug"], 
     "assignees":["utanayno"] 
-         } <br>
+         }` <br>
     Tests: <br>
-    var key = "number" 
+    `var key = "number" 
     var value = pm.response.json().number 
     pm.collectionVariables.set(key, value) 
 <br>
     pm.test("Status code is 201", function () {
     pm.response.to.have.status(201);
-    });
+    });`
 3. **GET** - получение списка Issues. <br>
     URL: {{github_url}}/repos/utanayno/test/issues <br>
-    Tests: pm.test("Status code is 200", function () {
+    Tests: <br>
+   `pm.test("Status code is 200", function () {
     pm.response.to.have.status(201);
-    }); 
-4. **PATCH** - изменение названия Issue, созданного в шаге 2. <br>
+    });` 
+5. **PATCH** - изменение названия Issue, созданного в шаге 2. <br>
     URL: {{github_url}}/repos/utanayno/test/issues/{{number}} <br>
-    Body: {
+    Body: `{
     "title": "Issue 2"
-    }
+    }`
     Tests: <br>
-    var key = "number"
+    `var key = "number"
     var value = pm.response.json().number
     pm.collectionVariables.set(key, value)
-
+    <br>
     pm.test("Status code is 200", function () {
     pm.response.to.have.status(200);
-    });
-5. **GET** - получение Issue, измененного в шаге 4. <br>
+    });`
+6. **GET** - получение Issue, измененного в шаге 4. <br>
     URL: {{github_url}}/repos/utanayno/test/issues/{{number}} <br>
     Tests: <br>
-    pm.test("Status code is 200", function () {
+    `pm.test("Status code is 200", function () {
     pm.response.to.have.status(201);
-    }); 
-6. **PATCH** - закрытие Issue, созданного в шаге 2 и изменненного в шаге 4. Удаление Issue возможно только в интерфейсе сервиса. С помощью API не реализовано.
+    });` 
+7. **PATCH** - закрытие Issue, созданного в шаге 2 и изменненного в шаге 4. Удаление Issue возможно только в интерфейсе сервиса. С помощью API не реализовано.
     URL: {{github_url}}/repos/utanayno/test/issues/{{number}} <br>
-    Body: {
+    Body: `{
     "state": "closed"
-    }
+    }`
     Tests: <br>
-    var key = "number"
+    `var key = "number"
     var value = pm.response.json().number
     pm.collectionVariables.set(key, value)
-
+    <br>
     pm.test("Status code is 200", function () {
     pm.response.to.have.status(200);
-    });
-7. **GET** - получение списка Issues. <br>
+    });`
+8. **GET** - получение списка Issues. <br>
     URL: {{github_url}}/repos/utanayno/test/issues <br>
     Tests: <br>
-    pm.test("Status code is 200", function () {
+    `pm.test("Status code is 200", function () {
     pm.response.to.have.status(201);
-    });
+    });`
  
 Для выполнения прогона коллекции:
 1) выбрать Run collection напротив названия коллекции SkyPro_test.
