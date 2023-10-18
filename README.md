@@ -21,23 +21,23 @@
 В коллекции SkyPro_test создаем переменную с базовым URL (Variable: github_url; Current value: https://api.github.com)
 
 Запросы, входящие в коллекцию:
-1. **GET** - получение списка Issues.
-    URL: {{github_url}}/repos/utanayno/test/issues
-    Tests: pm.test("Status code is 200", function () {
-    pm.response.to.have.status(201);
-}); 
-2. **POST** - создание Issue в репозитории test.
-    URL: {{github_url}}/repos/utanayno/test/issues
+1. **GET** - получение списка Issues. <br>
+    URL: {{github_url}}/repos/utanayno/test/issues <br>
+    Tests: pm.test("Status code is 200", function () { <br>
+    pm.response.to.have.status(201); <br>
+});  <br>
+2. **POST** - создание Issue в репозитории test. <br>
+    URL: {{github_url}}/repos/utanayno/test/issues <br>
     Body: {
-    "title": "Issue 1",
-    "body": "Something went wrong",
-    "labels":["bug"],
-    "assignees":["utanayno"]
-         }
-    Tests:
-    var key = "number"
-    var value = pm.response.json().number
-    pm.collectionVariables.set(key, value)
+    "title": "Issue 1", <br>
+    "body": "Something went wrong", <br>
+    "labels":["bug"], <br>
+    "assignees":["utanayno"] <br>
+         } <br>
+    Tests: <br>
+    var key = "number" <br>
+    var value = pm.response.json().number <br>
+    pm.collectionVariables.set(key, value) <br>
 
     pm.test("Status code is 201", function () {
     pm.response.to.have.status(201);
