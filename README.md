@@ -23,10 +23,7 @@
 Запросы, входящие в коллекцию:
 1. **GET** - получение списка Issues. <br>
     URL: `{{github_url}}/repos/utanayno/test/issues` <br>
-    Tests: <br>
-    `pm.test("Status code is 200", function () { 
-    pm.response.to.have.status(201); 
-});` <br>
+    
 2. **POST** - создание Issue в репозитории test. <br>
     URL: `{{github_url}}/repos/utanayno/test/issues` <br>
     Body: `{
@@ -35,58 +32,33 @@
     "labels":["bug"], 
     "assignees":["utanayno"] 
          }` <br>
-    Tests: <br>
-    `var key = "number" 
-    var value = pm.response.json().number 
-    pm.collectionVariables.set(key, value)` 
-<br>
-    `pm.test("Status code is 201", function () {
-    pm.response.to.have.status(201);
-    });`
+   
 3. **GET** - получение списка Issues. <br>
     URL: `{{github_url}}/repos/utanayno/test/issues` <br>
-    Tests: <br>
-   `pm.test("Status code is 200", function () {
-    pm.response.to.have.status(201);
-    });` 
+    
 5. **PATCH** - изменение названия Issue, созданного в шаге 2. <br>
     URL: `{{github_url}}/repos/utanayno/test/issues/{{number}}` <br>
     Body: `{
     "title": "Issue 2"
     }`
-    Tests: <br>
-    `var key = "number"
-    var value = pm.response.json().number
-    pm.collectionVariables.set(key, value)`
-    <br>
-    `pm.test("Status code is 200", function () {
-    pm.response.to.have.status(200);
-    });`
+   
 6. **GET** - получение Issue, измененного в шаге 4. <br>
     URL: `{{github_url}}/repos/utanayno/test/issues/{{number}}` <br>
-    Tests: <br>
-    `pm.test("Status code is 200", function () {
-    pm.response.to.have.status(201);
-    });` 
+    
 7. **PATCH** - закрытие Issue, созданного в шаге 2 и изменненного в шаге 4. Удаление Issue возможно только в интерфейсе сервиса. С помощью API не реализовано.
     URL: `{{github_url}}/repos/utanayno/test/issues/{{number}}` <br>
     Body: `{
     "state": "closed"
     }`
-    Tests: <br>
-    `var key = "number"
-    var value = pm.response.json().number
-    pm.collectionVariables.set(key, value)`
-    <br>
-    `pm.test("Status code is 200", function () {
-    pm.response.to.have.status(200);
-    });`
+    
 8. **GET** - получение списка Issues. <br>
     URL: `{{github_url}}/repos/utanayno/test/issues` <br>
-    Tests: <br>
-    `pm.test("Status code is 200", function () {
-    pm.response.to.have.status(201);
-    });`
+   
+
+Во вкладку Tests у каждого запроса коллекции добавляем скрипты:
+1) для методов GET, PATCH: проверку на статус 200 ОК в ответе.
+2) для метода POST: проверку на статус 201 ОК в ответе.
+3) для методов POST, PATCH: скрипт на сохранение переменной номера Issue для передачи в последующие запросы.
  
 Для выполнения прогона коллекции:
 1) выбрать Run collection напротив названия коллекции SkyPro_test.
