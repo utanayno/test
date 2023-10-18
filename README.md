@@ -23,10 +23,10 @@
 Запросы, входящие в коллекцию:
 1. **GET** - получение списка Issues. <br>
     URL: {{github_url}}/repos/utanayno/test/issues <br>
-    Tests: ```<br>
-    pm.test("Status code is 200", function () { 
+    Tests: <br>
+    `pm.test("Status code is 200", function () { 
     pm.response.to.have.status(201); 
-});  ```<br>
+});` <br>
 2. **POST** - создание Issue в репозитории test. 
     URL: {{github_url}}/repos/utanayno/test/issues 
     Body: {
