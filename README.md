@@ -14,9 +14,9 @@
 2) Вставляем в созданную коллекцию SkyPro_test Postman (вкладка Authorization, Type: Bearer Token).
 
 Методы, используемые в запросах:
-1) **GET**. https://api.github.com/repos/{owner}/{repo}/issues
-2) **POST**. https://api.github.com/repos/{owner}/{repo}/issues
-3) **PATCH**. https://api.github.com/repos/{owner}/{repo}/issues/{issue_number}
+1) **GET**. `https://api.github.com/repos/{owner}/{repo}/issues`
+2) **POST**. `https://api.github.com/repos/{owner}/{repo}/issues`
+3) **PATCH**. `https://api.github.com/repos/{owner}/{repo}/issues/{issue_number}`
 
 В коллекции SkyPro_test создаем переменную с базовым URL (Variable: github_url; Current value: https://api.github.com)
 
@@ -28,7 +28,7 @@
     pm.response.to.have.status(201); 
 });` <br>
 2. **POST** - создание Issue в репозитории test. <br>
-    URL: {{github_url}}/repos/utanayno/test/issues 
+    URL: `{{github_url}}/repos/utanayno/test/issues` <br>
     Body: `{
     "title": "Issue 1", 
     "body": "Something went wrong", 
@@ -38,51 +38,51 @@
     Tests: <br>
     `var key = "number" 
     var value = pm.response.json().number 
-    pm.collectionVariables.set(key, value) 
+    pm.collectionVariables.set(key, value)` 
 <br>
-    pm.test("Status code is 201", function () {
+    `pm.test("Status code is 201", function () {
     pm.response.to.have.status(201);
     });`
 3. **GET** - получение списка Issues. <br>
-    URL: {{github_url}}/repos/utanayno/test/issues <br>
+    URL: `{{github_url}}/repos/utanayno/test/issues` <br>
     Tests: <br>
    `pm.test("Status code is 200", function () {
     pm.response.to.have.status(201);
     });` 
 5. **PATCH** - изменение названия Issue, созданного в шаге 2. <br>
-    URL: {{github_url}}/repos/utanayno/test/issues/{{number}} <br>
+    URL: `{{github_url}}/repos/utanayno/test/issues/{{number}}` <br>
     Body: `{
     "title": "Issue 2"
     }`
     Tests: <br>
     `var key = "number"
     var value = pm.response.json().number
-    pm.collectionVariables.set(key, value)
+    pm.collectionVariables.set(key, value)`
     <br>
-    pm.test("Status code is 200", function () {
+    `pm.test("Status code is 200", function () {
     pm.response.to.have.status(200);
     });`
 6. **GET** - получение Issue, измененного в шаге 4. <br>
-    URL: {{github_url}}/repos/utanayno/test/issues/{{number}} <br>
+    URL: `{{github_url}}/repos/utanayno/test/issues/{{number}}` <br>
     Tests: <br>
     `pm.test("Status code is 200", function () {
     pm.response.to.have.status(201);
     });` 
 7. **PATCH** - закрытие Issue, созданного в шаге 2 и изменненного в шаге 4. Удаление Issue возможно только в интерфейсе сервиса. С помощью API не реализовано.
-    URL: {{github_url}}/repos/utanayno/test/issues/{{number}} <br>
+    URL: `{{github_url}}/repos/utanayno/test/issues/{{number}}` <br>
     Body: `{
     "state": "closed"
     }`
     Tests: <br>
     `var key = "number"
     var value = pm.response.json().number
-    pm.collectionVariables.set(key, value)
+    pm.collectionVariables.set(key, value)`
     <br>
-    pm.test("Status code is 200", function () {
+    `pm.test("Status code is 200", function () {
     pm.response.to.have.status(200);
     });`
 8. **GET** - получение списка Issues. <br>
-    URL: {{github_url}}/repos/utanayno/test/issues <br>
+    URL: `{{github_url}}/repos/utanayno/test/issues` <br>
     Tests: <br>
     `pm.test("Status code is 200", function () {
     pm.response.to.have.status(201);
