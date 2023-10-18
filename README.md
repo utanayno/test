@@ -1,5 +1,5 @@
 # test
-## Документация коллекции SkyPro_test
+## Документация по тестированию API GitHub issues
 
  
 Ссылка на репозиторий: https://github.com/utanayno/test.git <br>
@@ -58,7 +58,8 @@
 Во вкладку Tests у каждого запроса коллекции добавляем скрипты:
 1) для методов GET, PATCH: проверку на статус 200 ОК в ответе.
 2) для метода POST: проверку на статус 201 ОК в ответе.
-3) для методов POST, PATCH: скрипт на сохранение переменной номера Issue для передачи в последующие запросы. `var key = "number"
+3) для методов POST, PATCH: скрипт на сохранение переменной номера Issue для передачи в последующие запросы.<br>
+`var key = "number"
 var value = pm.response.json().number
 pm.collectionVariables.set(key, value)`
  
