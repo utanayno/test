@@ -1,21 +1,90 @@
 # test
 ## Документация коллекции SkyPro_test
 
-Пользователь: utanayno. 
-Ссылка на репозиторий: https://github.com/utanayno/test.git
+ 
+Ссылка на репозиторий: [https://github.com/utanayno/test.git]
+Документация по API GitHub issues: [https://docs.github.com/en/rest/issues/issues?apiVersion=2022-11-28#about-issues]
 
-Коллекция содержит 4 метода, которая выполняет создание Issue в репозитории test, которые выполняются последовательно:
-1. POST - Создание Issue в репозитории test.
-2. GET - получение списка Issues.
-3. PATCH - изменение названия Issue, созданного в шаге 1.
-4. PATCH - закрытие ISSUE, созданного в шаге 1 и изменненного в шаге 3.
+Для работы с коллекцией должен быть создан репозиторий в github (test).
+Коллекция SkyPro_test в Postman содержит 7 запросов, которая выполняет создание Issue в репозитории test, получение списка Issues, изменение и удаление Issue.
+Коллекция должна быть запущена и выполнена строго последовательно.
 
+Для работы с коллекцией необходимо добавить токен авторизации github:
+1) Заходим на github во вкладку Settings → Developer Settings → Personal access tokens (classic), копируем
+2) Вставляем в созданную коллекцию SkyPro_test Postman (вкладка Authorization, Type: Bearer Token).
+
+Методы, используемые в запросах:
+1) **GET**. https://api.github.com/repos/{owner}/{repo}/issues
+2) **POST**. https://api.github.com/repos/{owner}/{repo}/issues
+3) **PATCH**. https://api.github.com/repos/{owner}/{repo}/issues/{issue_number}
+
+В коллекции SkyPro_test создаем переменную с базовым URL (Variable: github_url; Current value: https://api.github.com)
+
+Запросы, входящие в коллекцию:
+1. **GET** - получение списка Issues.
+    URL: {{github_url}}/repos/utanayno/test/issues
+    Tests: pm.test("Status code is 200", function () {
+    pm.response.to.have.status(201);
+}); 
+2. **POST** - создание Issue в репозитории test.
+    URL: {{github_url}}/repos/utanayno/test/issues
+    Body: {
+    "title": "Issue 1",
+    "body": "Something went wrong",
+    "labels":["bug"],
+    "assignees":["utanayno"]
+         }
+    Tests:
+    var key = "number"
+    var value = pm.response.json().number
+    pm.collectionVariables.set(key, value)
+
+    pm.test("Status code is 201", function () {
+    pm.response.to.have.status(201);
+    });
+3. **GET** - получение списка Issues.
+    URL: {{github_url}}/repos/utanayno/test/issues
+    Tests: pm.test("Status code is 200", function () {
+    pm.response.to.have.status(201);
+    }); 
+4. **PATCH** - изменение названия Issue, созданного в шаге 2.
+    URL: {{github_url}}/repos/utanayno/test/issues/{{number}}
+    Body: {
+    "title": "Issue 2"
+    }
+    Tests:
+    var key = "number"
+    var value = pm.response.json().number
+    pm.collectionVariables.set(key, value)
+
+    pm.test("Status code is 200", function () {
+    pm.response.to.have.status(200);
+    });
+5. **GET** - получение Issue, измененного в шаге 4.
+    URL: {{github_url}}/repos/utanayno/test/issues/{{number}}
+    Tests: pm.test("Status code is 200", function () {
+    pm.response.to.have.status(201);
+    }); 
+6. **PATCH** - закрытие Issue, созданного в шаге 2 и изменненного в шаге 4. Удаление Issue возможно только в интерфейсе сервиса. С помощью API не реализовано.
+    URL: {{github_url}}/repos/utanayno/test/issues/{{number}}
+    Body: {
+    "state": "closed"
+    }
+    Tests:
+    var key = "number"
+    var value = pm.response.json().number
+    pm.collectionVariables.set(key, value)
+
+    pm.test("Status code is 200", function () {
+    pm.response.to.have.status(200);
+    });
+7. **GET** - получение списка Issues.
+    URL: {{github_url}}/repos/utanayno/test/issues
+    Tests: pm.test("Status code is 200", function () {
+    pm.response.to.have.status(201);
+    });
+ 
 Для выполнения прогона коллекции:
 1) выбрать Run collection напротив названия коллекции SkyPro_test.
 2) нажать Run SkyPro_test.
 3) результаты прогона приведены на вкладке Run Summary.
-
-В коллекцию добавлен скрипт, который записывает переменную номера Issue и подставляет его в последющие проверки, поэтому вручную менять ничео не нужно.
-
-
-
