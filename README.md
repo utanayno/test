@@ -10,8 +10,9 @@
 Коллекция должна быть запущена и выполнена строго последовательно.
 
 Для работы с коллекцией необходимо добавить токен авторизации github:
-1) Заходим на github во вкладку Settings → Developer Settings → Personal access tokens (classic), копируем
+1) Заходим на github во вкладку Settings → Developer Settings → Personal access tokens (classic), копируем.
 2) Вставляем в созданную коллекцию SkyPro_test Postman (вкладка Authorization, Type: Bearer Token).
+3) У каждого запроса во вкладке Authorization в Type указать: Inherit auth from parent.
 
 Методы, используемые в запросах:
 1) **GET**. `https://api.github.com/repos/{owner}/{repo}/issues`
